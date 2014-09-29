@@ -1269,6 +1269,11 @@ public class InternalPartitionServiceImpl implements InternalPartitionService, M
                             }
                         } else {
                             currentPartition.setPartitionInfo(replicas);
+                            // ARRIS CUSTOM FIX
+                            MigrationInfo migrationInfo = new MigrationInfo(partitionId, null, currentOwner);
+                            sendMigrationEvent(migrationInfo, MigrationStatus.STARTED);
+                            sendMigrationEvent(migrationInfo, MigrationStatus.COMPLETED);
+                            // END ARRIS CUSTOM FIX
                         }
                     }
                     syncPartitionRuntimeState(members);
